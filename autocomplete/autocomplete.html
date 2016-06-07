@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Email后缀提示</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="page">
+    <div class="fields three mails">
+      <div class="field">
+        <label>邮箱一</label>
+        <input type="text">
+      </div>
+      <div class="field">
+        <label>邮箱二</label>
+        <input type="text">
+      </div>
+      <div class="field">
+        <label>邮箱三</label>
+        <input type="text">
+      </div>
+    </div>  
+    
+    <div class="fields three cities">
+      <div class="field">
+        <label>城市一</label>
+        <input type="text">
+      </div>
+      <div class="field">
+        <label>城市二</label>
+        <input type="text">
+      </div>
+      <div class="field">
+        <label>城市三</label>
+        <input type="text">
+      </div>
+    </div>  
+    
+  </div>
+
+
+  <script src='js/jquery.js'></script>
+  <script src='js/autoComplete.js'></script>
+  <script src='js/emailComplete.js'></script>
+  <script src='js/cityComplete.js'></script>
+  <script>
+    
+    // 补全邮箱后缀
+    $('.mails input').each(function(){
+      new EmailCompelte($(this));
+    });
+    
+  </script>
+  
+  <script>
+
+    // 补全其他列表
+    var cityList = [
+      "阿勒泰-aletai-alt",
+      "安康-ankang-ak",
+      "阿克苏-akesu-aks",
+      "鞍山-anshan-as",
+      "安庆-anqing-aq",
+      "安顺-anshun-as",
+      "阿拉善左-alashanzuo-alsz",
+      "阿里-ali-al",
+      "阿拉善右-alashanyou-alsy",
+      "阿尔山-aershan-aes",
+      "百色-baise-bs",
+      "包头-baotou-bt",
+      "毕节-bijie-bj",
+      "北海-beihai-bh",
+      "北京-beijing-bj",
+      "博乐-bole-bl",
+      "保山-baoshan-bs",
+      "巴彦淖尔-bayanneer-byne",
+      "昌都-changdu-cd",
+      "常德-changde-cd",
+      "长春-changchun-cc",
+      "朝阳-chaoyang-cy",
+      "赤峰-chifeng-cf",
+      "长治-changzhi-cz",
+      "重庆-chongqing-cq",
+      "长海-changhai-ch",
+      "长沙-changsha-cs",
+      "成都-chengdu-cd",
+      "常州-changzhou-cz",
+      "池州-chizhou-cz",
+      "长白山-changbaishan-cbs",
+      "潮州-chaozhou-cz",
+      "大同-datong-dt",
+      "达县-daxian-dx",
+      "稻城-daocheng-dc",
+      "丹东-dandong-dd",
+      "迪庆-diqing-dq",
+      "大连-dalian-dl",
+      "大理-dali-dl",
+      "敦煌-dunhuang-dh",
+      "东营-dongying-dy",
+      "大庆-daqing-dq",
+      "德令哈-delingha-dlh",
+      "德宏-dehong-dh",
+      "鄂尔多斯-eerduosi-eeds",
+      "额济纳旗-ejinaqi-ejnq",
+      "恩施-enshi-es",
+      "二连浩特-erlianhaote-elht",
+      "福州-fuzhou-fz",
+      "阜阳-fuyang-fy",
+      "佛山-fushan-fs",
+      "抚远-fuyuan-fy",
+      "富蕴-fuyun-fy",
+      "广州-guangzhou-gz",
+      "广汉-guanghan-gh",
+      "格尔木-geermu-gem",
+      "广元-guangyuan-gy",
+      "固原-guyuan-gy",
+      "赣州-ganzhou-gz",
+      "贵阳-guiyang-gy",
+      "桂林-guilin-gl",
+      "光化-guanghua-gh",
+      "红原-hongyuan-hy",
+      "海口-haikou-hk",
+      "河池-hechi-hc",
+      "邯郸-handan-hd",
+      "黑河-heihe-hh",
+      "呼和浩特-huhehaote-hhht",
+      "合肥-hefei-hf",
+      "杭州-hangzhou-hz",
+      "淮安-huaian-ha",
+      "怀化-huaihua-hh",
+      "海拉尔-hailaer-hle",
+      "哈密-hami-hm",
+      "衡阳-hengyang-hy",
+      "哈尔滨-haerbin-heb",
+      "和田-hetian-ht",
+      "花土沟-huatugou-htg",
+      "惠州-huizhou-hz",
+      "汉中-hanzhong-hz",
+      "黄山-huangshan-hs",
+      "景德镇-jingdezhen-jdz",
+      "加格达奇-jiagedaqi-jgdq",
+      "嘉峪关-jiayuguan-jyg",
+      "井冈山-jinggangshan-jgs",
+      "金昌-jinchang-jc",
+      "九江-jiujiang-jj",
+      "晋江-jinjiang-jj",
+      "佳木斯-jiamusi-jms",
+      "济宁-jining-jn",
+      "锦州-jinzhou-jz",
+      "鸡西-jixi-jx",
+      "九寨沟-jiuzhaigou-jzg",
+      "荆州-jingzhou-jz",
+      "揭阳-jieyang-jy",
+      "济南-jinan-jn",
+      "库车-kuche-kc",
+      "康定-kangding-kd",
+      "喀什-kashi-ks",
+      "凯里-kaili-kl",
+      "喀纳斯-kanasi-kns",
+      "昆明-kunming-km",
+      "库尔勒-kuerle-kel",
+      "克拉玛依-kelamayi-klmy",
+      "黎平-liping-lp",
+      "龙岩-longyan-ly",
+      "临汾-linfen-lf",
+      "兰州-lanzhou-lz",
+      "梁平-liangping-lp",
+      "丽江-lijiang-lj",
+      "荔波-libo-lb",
+      "吕梁-lvliang-ll",
+      "临沧-lincang-lc",
+      "六盘水-liupanshui-lps",
+      "拉萨-lasa-ls",
+      "林西-linxi-lx",
+      "洛阳-luoyang-ly",
+      "连云港-lianyungang-lyg",
+      "临沂-linyi-ly",
+      "柳州-liuzhou-lz",
+      "泸州-luzhou-lz",
+      "林芝-linzhi-lz",
+      "芒市-mangshi-ms",
+      "牡丹江-mudanjiang-mdj",
+      "绵阳-mianyang-my",
+      "梅州-meizhou-mz",
+      "满洲里-manzhouli-mzl",
+      "漠河-mohe-mh",
+      "南昌-nanchang-nc",
+      "南充-nanchong-nc",
+      "宁波-ningbo-nb",
+      "南京-nanjing-nj",
+      "宁蒗-ninglang-nl",
+      "那拉提-nalati-nlt",
+      "南宁-nanning-nn",
+      "南阳-nanyang-ny",
+      "南通-nantong-nt",
+      "攀枝花-panzhihua-pzh",
+      "普洱-puer-pe",
+      "琼海-qionghai-qh",
+      "秦皇岛-qinhuangdao-qhd",
+      "且末-qiemo-qm",
+      "庆阳-qingyang-qy",
+      "黔江-qianjiang-qj",
+      "泉州-quanzhou-qz",
+      "衢州-quzhou-qz",
+      "齐齐哈尔-qiqihaer-qqhe",
+      "青岛-qingdao-qd",
+      "日照-rizhao-rz",
+      "日喀则-rikaze-rkz",
+      "神农架-shennongjia-snj",
+      "上海-shanghai-sh",
+      "沈阳-shenyang-sy",
+      "石河子-shihezi-shz",
+      "石家庄-shijiazhuang-sjz",
+      "三明-sanming-sm",
+      "汕头-shantou-st",
+      "三亚-sanya-sy",
+      "深圳-shenchou-sc",
+      "十堰-shiyan-sy",
+      "台州-taizhou-tz",
+      "塔城-tacheng-tc",
+      "腾冲-tengchong-tc",
+      "铜仁-tongren-tr",
+      "通辽-tongliao-tl",
+      "天水-tianshui-ts",
+      "吐鲁番-tulufan-tlf",
+      "通化-tonghua-th",
+      "天津-tianjin-tj",
+      "唐山-tangshan-ts",
+      "太原-taiyuan-ty",
+      "泰州-taizhou-tz",
+      "乌兰浩特-wulanhaote-wlht",
+      "乌鲁木齐-wulumuqi-wlmq",
+      "潍坊-weifang-wf",
+      "威海-weihai-wh",
+      "文山-wenshan-ws",
+      "温州-wenzhou-wz",
+      "乌海-wuhai-wh",
+      "武汉-wuhan-wh",
+      "武夷山-wuyishan-wys",
+      "无锡-wuxi-wx",
+      "梧州-wuzhou-wz",
+      "万州-wanzhou-wz",
+      "兴义-xingyi-xy",
+      "夏河-xiahe-xh",
+      "西双版纳-xishuangbanna-xsbn",
+      "西安-xian-xa",
+      "咸阳-xianyang-xy",
+      "忻州-xinzhou-xz",
+      "襄阳-xiangyang-xy",
+      "西昌-xichang-xc",
+      "锡林浩特-xilinhaote-xlht",
+      "厦门-xiamen-xm",
+      "西宁-xining-xn",
+      "徐州-xuzhou-xz",
+      "延安-yanan-ya",
+      "银川-yinchuan-yc",
+      "伊春-yichun-yc",
+      "永州-yongzhou-yz",
+      "榆林-yulin-yl",
+      "宜宾-yibin-yb",
+      "运城-yuncheng-yc",
+      "宜春-yichun-yc",
+      "宜昌-yichang-yc",
+      "伊宁-yining-yn",
+      "义乌-yiwu-yw",
+      "营口-yingkou-yk",
+      "延吉-yanji-yj",
+      "烟台-yantai-yt",
+      "盐城-yancheng-yc",
+      "扬州-yangzhou-yz",
+      "玉树-yushu-ys",
+      "郑州-zhengzhou-zz",
+      "张家界-zhangjiajie-zjj",
+      "舟山-zhoushan-zs",
+      "张掖-zhangye-zy",
+      "邵通-shaotong-st",
+      "中山-zhongshan-zs",
+      "湛江-zhanjiang-zj",
+      "中卫-zhongwei-zw",
+      "张家口-zhangjiakou-zjk",
+      "珠海-zhuhai-zh",
+      "遵义-zunyi-zy"
+    ];
+
+    $('.cities input').each(function(){
+      new CityCompelte($(this),cityList);
+    });
+    
+  </script>
+</body>
+</html>
