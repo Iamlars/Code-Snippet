@@ -8,10 +8,32 @@
 效果图：
 
 ### email后缀补全
+    $('.mails input').each(function(){
+      new EmailCompelte($(this));
+    });
+     
+    或者：
+    
+    $.fn.emailCompelte = function(){
+      this.each(function(){
+        new EmailCompelte($(this));  
+      }) 
+    };
+    
+    $('.mails input').emailCompelte();
 
 ![email后缀补全](./images/email.png)
 
-### 城市列表筛选
+### 城市列表筛选 
+    var cityList = [
+      "阿勒泰-aletai-alt",
+      "安康-ankang-ak",
+      ...
+      "遵义-zunyi-zy"
+    ];
 
+    $('.cities input').each(function(){
+      new CityCompelte($(this),cityList);
+    });
 ![城市列表筛选](./images/other.png)
   
