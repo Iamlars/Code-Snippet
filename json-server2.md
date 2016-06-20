@@ -11,11 +11,13 @@
 
 [mockjs用法示例](#mock)
 
-> [为什么不在浏览器中使用mockjs](#diff_with_mock)
+> [安装mockjs](#install)
 
 > [Mock.mock](#mock_mock)
 
 > [Mock.Random](#mock_random)
+
+> [为什么不在浏览器中使用mockjs](#diff_with_mock)
 
 > [示例](#mock_example)
 
@@ -28,7 +30,7 @@
 
 上一篇演示时，使用了 `db.json` 作为数据载体，虽然方便，但是如果需要大量的数据，则显得力不从心。
 幸好 `json server` 可以通过js动态生成json格式数据，官方例子为生成1000组user数据：
-````
+````javascript
 # /mock/db.js
 
 module.exports = function() {
@@ -112,7 +114,12 @@ Random.image('200x100', '#4A7BF7', 'hello')
 
 请先用15分钟阅读 [mockjs官方文档](https://github.com/nuysoft/Mock/wiki)
 
-
+<a name='install'></a>
+### 安装mockjs
+在 `/mock` 目录下安装
+````
+npm install mockjs --save
+````
 
 
 <a name='mock_mock'></a>
@@ -173,7 +180,7 @@ Mock.mock({
 对象是一个新闻列表，其中有100条新闻，每条新闻有对应的id，标题，内容，简介，标签，
 浏览量，和一个图片数组：
 
-````
+````javascript
 # /mock/db.js
 
 let Mock  = require('mockjs');
