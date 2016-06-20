@@ -1,4 +1,4 @@
-# 用JSON-server快速模拟REST API(一)
+# 用JSON-server模拟REST API(一) 安装运行
 
 在开发过程中，前后端不论是否分离，接口多半是滞后于页面开发的。所以建立一个
 REST风格的API接口，给前端页面提供虚拟的数据，是非常有必要的。
@@ -24,7 +24,9 @@ REST风格的API接口，给前端页面提供虚拟的数据，是非常有必�
 
 > [put](#put)
 
-[用JSON-server快速模拟REST API(二)](#安装)
+[用JSON-server模拟REST API(二)  动态数据](#安装)
+
+[用JSON-server模拟REST API(三)  进阶使用](#安装)
 
 
 <a name='install'></a>
