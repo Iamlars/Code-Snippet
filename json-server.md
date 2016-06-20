@@ -1,4 +1,4 @@
-# 用JSON-server快速模拟REST API
+# 用JSON-server快速模拟REST API(一)
 
 在开发过程中，前后端不论是否分离，接口多半是滞后于页面开发的。所以建立一个
 REST风格的API接口，给前端页面提供虚拟的数据，是非常有必要的。
@@ -8,6 +8,26 @@ REST风格的API接口，给前端页面提供虚拟的数据，是非常有必�
 并支持GET, POST, PUT, PATCH 和 DELETE 方法，更提供了一系列的查询方法，
 如limit，order等。下面我将详细介绍json server的使用。
 
+目录：
+
+[安装](#install)
+
+[运行](#run)
+> [通过命令行](#run_by_cli)
+
+> [使用package.json](#run_by_npm)
+
+[操作数据](#method)
+> [get](#get)
+
+> [post](#post)
+
+> [put](#put)
+
+[用JSON-server快速模拟REST API(二)](#安装)
+
+
+<a name='install'></a>
 ## 安装
 
 首先你的电脑中需要安装nodejs，建议使用最新版本。
@@ -51,10 +71,13 @@ json-server [options] <source>
 https://github.com/typicode/json-server
 ````
 
+<a name='run'></a>
 ## 运行
 
 安装完成后，可以在任一目录下建立一个 `xxx.json` 文件,例如在 
-`mock/` 文件夹下，建立一个 `db.json` 文件，并写入以下内容
+`mock/` 文件夹下，建立一个 `db.json` 文件，并写入以下内容，
+并在 `mock/` 文件夹下执行 `json-server db.json -p 3003` 。
+<a name='run_by_cli'></a>
 
 ````
 {
@@ -92,7 +115,7 @@ https://github.com/typicode/json-server
   ]
 }
 ````
-
+<a name='run_by_npm'></a>
 为了方便，再创建一个 `package.json` 文件，写入
 ````
 {
@@ -125,9 +148,10 @@ https://github.com/typicode/json-server
 
 如果不成功请检查 `db.json` 文件的格式是否正确。
 
+<a name='method'></a>
 ## 操作数据
 
-
+<a name='get'></a>
 ### 使用【GET 接口】查询数据
 这个时候访问 `http://localhost:3003/db` ，可以查看 `db.json` 
 文件中所定义的全部数据。
@@ -153,7 +177,7 @@ https://github.com/typicode/json-server
   }
 ]
 ````
-
+<a name='post'></a>
 ### 使用【POST 接口】增加数据
 以jquery的 `$.ajax` 方法举例,以下代码会实时的向 `db.json` 中的 `news` 对象push一条新的数据
 再次用 `get` 方式访问 `http://localhost:3003/news` , 就可以看到它了
@@ -171,7 +195,7 @@ $.ajax({
   }
 )
 ````
-
+<a name='put'></a>
 ### 使用【PUT 接口】修改数据
 同样以jquery的 `$.ajax` 方法举例,以下代码会实时的对 `db.json` 中的 `news` 对象
 中 `id=1` 数据进行修改
